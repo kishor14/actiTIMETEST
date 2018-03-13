@@ -3,25 +3,22 @@ package generic;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 public abstract class BaseTest implements IAutoConst {
-	private WebDriver driver;
+	protected WebDriver driver;
 	static {
 		System.setProperty(CHROME_KEY, CHROME_VALUE);
 		System.setProperty(GECKO_KEY,GECKO_VALUE);
 	}
 	@BeforeMethod(alwaysRun=true)
 	public void openApp() {
-		long ITO=Long.parseLong(AutoUtils.getProperty(CONFIG_PATH, "URL"));
-		String URL=AutoUtils.getProperty(CONFIG_PATH, "ITO");
+		long ITO=Long.parseLong(AutoUtils.getProperty(CONFIG_PATH, "ITO"));
+		String URL=AutoUtils.getProperty(CONFIG_PATH, "URL");
 
-		DesiredCapabilities dc =new DesiredCapabilities();
-		dc.setBrowserName("chrome");
-		driver = new RemoteWebDriver(dc);
+		driver=new ChromeDriver();
 		driver.get(URL);
 		driver.manage().timeouts().implicitlyWait(ITO, TimeUnit.SECONDS);
 	}
