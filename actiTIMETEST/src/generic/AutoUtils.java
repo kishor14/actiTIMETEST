@@ -17,7 +17,7 @@ import org.openqa.selenium.WebDriver;
 
 public class AutoUtils {
 	public static String getValue(String path,String sheet,int row,int cell) {
-		String value="";	
+		String value=" ";	
 		try {
 				Workbook wb = WorkbookFactory.create(new FileInputStream(path));
 				value=wb.getSheet(sheet).getRow(row).getCell(cell).toString();
